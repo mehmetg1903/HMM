@@ -153,3 +153,10 @@ class HMM(object):
             p.append(i)
         p = ''.join(map(lambda x: self.Q[x], p[::-1]))
         return omx, p # Return log probability and path
+
+hmm = HMM({"FF":0.9, "FL":0.1, "LF":0.1, "LL":0.9}, # transition matrix A
+          {"FH":0.5, "FT":0.5, "LH":0.75, "LT":0.25}, # emission matrix E
+          {"F":0.5, "L":0.5}) # initial probabilities I
+jprob1 = hmm.jointProb("FFFLLLFFFFF", "THTHHHTHTTH")
+myprob1 = (0.5 ** 9) * (0.75 ** 3) * (0.9 ** 8) * (0.1 ** 2)
+print jprob1, myprob1
